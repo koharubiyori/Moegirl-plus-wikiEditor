@@ -1,13 +1,3 @@
-## 基础webpack开发框架
+## Moegirl-Plus-wikiEditor
 
-未集成任何mvvm框架的基础开发框架，遵循webpack5/babel7推荐配置。
-
-主要用来在此基础上魔改产生新的框架。
-
-已配置内容：
-* sass(使用scss)
-* typescript
-* 开发服务器
-* css、js代码压缩
-* 资源文件导入
-* 自动生成html
+对萌百小工具“编辑框代码高亮 Bhsd/CodeMirror版本”进行简单封装，用于[MoegirlPlus](https://github.com/koharubiyori/Moegirl-plus-native)的内置编辑器。
