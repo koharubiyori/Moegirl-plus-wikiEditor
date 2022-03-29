@@ -13,7 +13,13 @@ const editor = CodeMirror.fromTextArea(textarea, {
   ...({ mwConfig } as any),
   mode: 'mediawiki',
   lineWrapping: true,
+  cursorHeight: 0.85,
+  cursorBlinkRate: 100,
   // lineNumbers: true,
 })
 
 ;(window as any).editor = editor
+
+editor.on("change", editor => {
+  ;(window as any).onEditorTextChange?.call(null, editor.getValue())
+})
