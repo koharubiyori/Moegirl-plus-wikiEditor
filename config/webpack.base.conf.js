@@ -13,7 +13,7 @@ module.exports = async function baseWebpackConfig(env) {
     },
   
     output: {
-      filename: 'editor.js',
+      filename: 'editor-main.js',
       path: path.resolve(__dirname, '../dist'),
       assetModuleFilename: 'assets/[name].[contenthash:8][ext]'
     },
@@ -32,8 +32,8 @@ module.exports = async function baseWebpackConfig(env) {
     plugins: [
       // 将样式抽离到单独的css文件
       new MiniCssExtractPlugin({
-        filename: devMode ? '[name].css' : '[name].css',
-        chunkFilename: devMode ? '[id].css' : '[id].css',
+        filename: 'editor-main.css',
+        // chunkFilename: devMode ? '[id].css' : '[id].css',
       }),
       
       // 创建html文件
