@@ -18,6 +18,13 @@ const editor = CodeMirror.fromTextArea(textarea, {
   // lineNumbers: true,
 })
 
+
+window.addEventListener("resize", () => {
+  const editorEl = editor.getWrapperElement()
+  editorEl.style.width = document.documentElement.clientWidth + 'px'
+  editorEl.style.height = document.documentElement.clientHeight + 'px'
+})
+
 ;(window as any).editor = editor
 
 editor.on("change", editor => {
