@@ -9,27 +9,29 @@ import './styles/index.scss'
 const textarea = document.createElement('textarea')
 document.body.append(textarea)
 
-const editor = CodeMirror.fromTextArea(textarea, {
-  ...({ mwConfig } as any),
-  mode: 'mediawiki',
-  lineWrapping: true,
-  cursorHeight: 0.85,
-  cursorBlinkRate: 100,
-  // lineNumbers: true,
-})
+function remakeEditor() {
+  window.editor?.toTextArea()
+  const editor = CodeMirror.fromTextArea(textarea, {
+    ...({ mwConfig } as any),
+    mode: 'mediawiki',
+    lineWrapping: true,
+  })
+  
+  window.editor = editor
+  return editor
+}
+
+window.editor = remakeEditor()
+;(window as any).remakeEditor = remakeEditor
 
 function resetEditorSize() {
-  const editorEl = editor.getWrapperElement()
-  editorEl.style.width = document.documentElement.clientWidth + 'px'
-  editorEl.style.height = document.documentElement.clientHeight + 'px'
+  window.editor.setSize(document.documentElement.clientWidth, document.documentElement.clientHeight)
 }
 
 window.addEventListener("resize", resetEditorSize)
 
 resetEditorSize()
 
-;(window as any).editor = editor
-
-editor.on("change", editor => {
+window.editor.on("change", editor => {
   ;(window as any).onEditorTextChange?.call(null, editor.getValue())
 })

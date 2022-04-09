@@ -18,7 +18,7 @@ module.exports = async function devWebpackConfig(env) {
         path.resolve(__dirname, '../dist')
       ],
       publicPath:'/',
-      host: 'localhost',
+      host: '0.0.0.0',
       port: 9000,
       hot: true, // 开启热更新
       overlay: true, // 浏览器页面上显示错误
