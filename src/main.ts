@@ -15,6 +15,7 @@ function remakeEditor() {
     ...({ mwConfig } as any),
     mode: 'mediawiki',
     lineWrapping: true,
+    scrollbarStyle: 'null',
   })
   
   window.editor = editor
@@ -34,4 +35,17 @@ resetEditorSize()
 
 window.editor.on("change", editor => {
   ;(window as any).onEditorTextChange?.call(null, editor.getValue())
+})
+
+// 解决点击编辑器底部内容时滚动后位置不再最底部的问题
+window.editor.on('beforeSelectionChange', editor => {
+  setTimeout(() => {
+    const lineCount = editor.lineCount()
+    const currentLine = editor.getCursor().line
+    if (lineCount - currentLine <= 3) {
+      const scrollElement = editor.getScrollerElement()
+      const contentHeight = scrollElement.querySelector('.CodeMirror-sizer')!!.clientHeight
+      scrollElement.scrollTo(0, contentHeight)
+    }
+  }, 30)
 })
